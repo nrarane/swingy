@@ -1,4 +1,4 @@
-package za.co.wethinkcode.swingy;
+package za.co.wethinkcode.swingy.model.artefacts;
 
 public class Shield extends Artefact {
     public Shield(String name, int power, ArtefactType type) {

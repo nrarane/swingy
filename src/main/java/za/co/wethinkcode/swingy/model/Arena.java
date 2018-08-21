@@ -1,11 +1,8 @@
-package za.co.wethinkcode.swingy.view;
+package za.co.wethinkcode.swingy.model;
 
-import za.co.wethinkcode.swingy.Enemy;
-import za.co.wethinkcode.swingy.Hero;
-import za.co.wethinkcode.swingy.Map;
-import za.co.wethinkcode.swingy.Player;
-
-import java.util.ArrayList;
+import za.co.wethinkcode.swingy.model.character.Enemy;
+import za.co.wethinkcode.swingy.model.character.Hero;
+import za.co.wethinkcode.swingy.model.character.Player;
 
 public class Arena {
 

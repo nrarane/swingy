@@ -1,17 +1,14 @@
-package za.co.wethinkcode.swingy;
+package za.co.wethinkcode.swingy.model.character;
 
 import javax.swing.text.Position;
 
-public class Hero extends Player {
+public class Enemy extends Player {
 
     private String winningMessage;
     private String losingMessage;
 
-    public Hero(String name, int level, int experience, int attack, int hitPoints, int defence, Position position, Artefact artefact) {
-
-    }
-
-    public Hero() {
+    public Enemy(String name, int level, int experience, int attack, int hitPoints, int defence, Position position) {
+        super(name, level, experience, attack, defence, hitPoints, position);
     }
 
     public String getWinningMessage() {
@@ -29,4 +26,5 @@ public class Hero extends Player {
     public void setLosingMessage(String losingMessage) {
         this.losingMessage = losingMessage;
     }
+
 }

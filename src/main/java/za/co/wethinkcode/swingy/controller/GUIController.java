@@ -1,6 +1,6 @@
 package za.co.wethinkcode.swingy.controller;
 
-import za.co.wethinkcode.swingy.view.Arena;
+import za.co.wethinkcode.swingy.model.Arena;
 
 public class GUIController implements GameController {
 

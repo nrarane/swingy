@@ -1,4 +1,4 @@
-package za.co.wethinkcode.swingy;
+package za.co.wethinkcode.swingy.model.character;
 
 import javax.swing.text.Position;
 
@@ -11,7 +11,16 @@ public class Player {
     public int defence;
     public int hitPoints;
     public Position position;
-    public Artefact artefact;
+
+    public Player(String name, int level, int experience, int attack, int defence, int hitPoints, Position position) {
+        this.name = name;
+        this.level = level;
+        this.experience = experience;
+        this.attack = attack;
+        this.defence = defence;
+        this.hitPoints = hitPoints;
+        this.position = position;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -41,7 +50,4 @@ public class Player {
         this.position = position;
     }
 
-    public void setArtefact(Artefact artefact) {
-        this.artefact = artefact;
-    }
 }

@@ -1,6 +1,8 @@
-package za.co.wethinkcode.swingy;
+package za.co.wethinkcode.swingy.model;
 
 import javafx.geometry.Pos;
+import za.co.wethinkcode.swingy.Direction;
+import za.co.wethinkcode.swingy.model.character.Player;
 
 import java.util.HashMap;
 

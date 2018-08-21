@@ -1,8 +1,8 @@
-package za.co.wethinkcode.swingy;
+package za.co.wethinkcode.swingy.model.artefacts;
 
-public class Gun extends Artefact {
+public class Knife extends Artefact {
 
-    public Gun(String name, int power, ArtefactType type) {
+    public Knife(String name, int power, ArtefactType type) {
         super(name, power, type);
     }
 
