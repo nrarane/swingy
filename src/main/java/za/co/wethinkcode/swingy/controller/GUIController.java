@@ -1,40 +1,53 @@
 package za.co.wethinkcode.swingy.controller;
 
-import za.co.wethinkcode.swingy.model.Arena;
+import za.co.wethinkcode.swingy.view.ConfirmPreviousGameScreenPanel;
+import za.co.wethinkcode.swingy.view.GUIView;
+import za.co.wethinkcode.swingy.view.HeroSelectionScreenPanel;
+import za.co.wethinkcode.swingy.view.HomeScreenPanel;
 
-public class GUIController implements GameController {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    public Arena arena;
+public class GUIController {
+    GUIView guiView;
 
-    public GUIController(Arena arena) {
-        this.arena = arena;
+    public void startGame() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                guiView = new GUIView();
+                showHomeScreen();
+            }
+        });
     }
 
-    public void moveSouth() {
-
+    public void showHeroSelection() {
+        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+        switchPanelInMainWindow(heroSelectionScreenPanel);
     }
 
-    public void moveNorth() {
-
+    public void loadPreviousGame() {
+        ConfirmPreviousGameScreenPanel confirmPreviousGameScreenPanel = new ConfirmPreviousGameScreenPanel();
+        switchPanelInMainWindow(confirmPreviousGameScreenPanel);
     }
 
-    public void moveEast() {
-
+    public void showPrevHomeScreen() {
+        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+        HeroSelectionScreenController heroSelectionScreenController
+                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
+        switchPanelInMainWindow(heroSelectionScreenPanel);
     }
 
-    public void moveWest() {
-
+    public void showHomeScreen() {
+        HomeScreenPanel homeScreenPanel = new HomeScreenPanel();
+        HomeScreenController homeScreenController
+                = new HomeScreenController(this, homeScreenPanel);
+        switchPanelInMainWindow(homeScreenPanel);
     }
 
-    public void controlPlayer(String heroName) {
-
-    }
-
-    public void attack() {
-
-    }
-
-    public void run() {
-
+    private void switchPanelInMainWindow(JPanel panel) {
+        guiView.switchPanel(panel);
     }
 }
