@@ -25,6 +25,8 @@ public class GUIController {
 
     public void showHeroSelection() {
         HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+        HeroSelectionScreenController heroSelectionScreenController
+                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
         switchPanelInMainWindow(heroSelectionScreenPanel);
     }
 
@@ -33,12 +35,12 @@ public class GUIController {
         switchPanelInMainWindow(confirmPreviousGameScreenPanel);
     }
 
-    public void showPrevHomeScreen() {
-        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
-        HeroSelectionScreenController heroSelectionScreenController
-                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
-        switchPanelInMainWindow(heroSelectionScreenPanel);
-    }
+//    public void showPrevHomeScreen() {
+//        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+//        HeroSelectionScreenController heroSelectionScreenController
+//                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
+//        switchPanelInMainWindow(heroSelectionScreenPanel);
+//    }
 
     public void showHomeScreen() {
         HomeScreenPanel homeScreenPanel = new HomeScreenPanel();
@@ -50,4 +52,12 @@ public class GUIController {
     private void switchPanelInMainWindow(JPanel panel) {
         guiView.switchPanel(panel);
     }
+
+    public void showHeroInfoScreen() {
+        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+        HeroSelectionScreenController heroSelectionScreenController
+                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
+        switchPanelInMainWindow(heroSelectionScreenPanel);
+    }
+    
 }

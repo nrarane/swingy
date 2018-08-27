@@ -14,7 +14,7 @@ public class HomeScreenController {
         this.homeScreenPanel = homeScreenPanel;
         this.guiController = guiController;
         homeScreenPanel.addNewHeroActionListener(btnNewHeroActionListener);
-//        homeScreenPanel.addNewHeroActionListener(btnLoadNewGameActionListener);
+        homeScreenPanel.loadNewHeroActionListener(btnLoadNewGameActionListener);
 
     }
 

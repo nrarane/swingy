@@ -14,14 +14,22 @@ public class HeroSelectionScreenController {
 
         this.heroSelectionScreenPanel = heroSelectionScreenPanel;
         this.guiController = guiController;
-        heroSelectionScreenPanel.addNewHeroActionListener(btnPreviousScreenListener);
+        heroSelectionScreenPanel.previousScreenActionListener(btnPreviousScreenListener);
+        heroSelectionScreenPanel.showHeroInfoActionListener(showHeroInfo);
 
     }
 
     ActionListener btnPreviousScreenListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            guiController.showPrevHomeScreen();
+            guiController.showHomeScreen();
+        }
+    };
+
+    ActionListener showHeroInfo = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            guiController.showHeroInfoScreen();
         }
     };
 }

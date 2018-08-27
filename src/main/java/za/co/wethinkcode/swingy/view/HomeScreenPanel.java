@@ -20,6 +20,9 @@ public class HomeScreenPanel extends JPanel{
 
     public void addNewHeroActionListener(ActionListener btn) {
         newHero.addActionListener(btn);
-//        loadBtn.addActionListener(btn);
+    }
+
+    public void loadNewHeroActionListener(ActionListener btn) {
+        loadBtn.addActionListener(btn);
     }
 }
