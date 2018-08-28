@@ -12,6 +12,8 @@ public class HeroSelectionScreenPanel extends JPanel {
     JButton heroTwo = new JButton("Hero 2");
     JButton heroThree = new JButton("Hero 3");
     JButton previousScr = new JButton("Previous Screen");
+    JButton startGame = new JButton("Start Game");
+    JTextArea heroInfo = new JTextArea(10, 80);
 
     public HeroSelectionScreenPanel() {
         setBackground(Color.DARK_GRAY);
@@ -21,6 +23,8 @@ public class HeroSelectionScreenPanel extends JPanel {
         add(heroOne);
         add(heroTwo);
         add(heroThree);
+        add(heroInfo);
+        add(startGame);
         add(previousScr);
 
 //        String pt1 = "<html><body width='";
@@ -47,5 +51,9 @@ public class HeroSelectionScreenPanel extends JPanel {
 
     public void showHeroInfoActionListener(ActionListener showHeroInfo) {
         heroOne.addActionListener(showHeroInfo);
+    }
+
+    public void startGameActionListener(ActionListener startGame) {
+        this.startGame.addActionListener(startGame);
     }
 }

@@ -15,7 +15,8 @@ public class HeroSelectionScreenController {
         this.heroSelectionScreenPanel = heroSelectionScreenPanel;
         this.guiController = guiController;
         heroSelectionScreenPanel.previousScreenActionListener(btnPreviousScreenListener);
-        heroSelectionScreenPanel.showHeroInfoActionListener(showHeroInfo);
+//        heroSelectionScreenPanel.showHeroInfoActionListener(showHeroInfo);
+        heroSelectionScreenPanel.startGameActionListener(startGame);
 
     }
 
@@ -26,10 +27,17 @@ public class HeroSelectionScreenController {
         }
     };
 
-    ActionListener showHeroInfo = new ActionListener() {
+//    ActionListener showHeroInfo = new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            guiController.showHeroInfoScreen();
+//        }
+//    };
+
+    ActionListener startGame = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            guiController.showHeroInfoScreen();
+            guiController.loadStage();
         }
     };
 }

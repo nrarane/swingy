@@ -1,9 +1,6 @@
 package za.co.wethinkcode.swingy.controller;
 
-import za.co.wethinkcode.swingy.view.ConfirmPreviousGameScreenPanel;
-import za.co.wethinkcode.swingy.view.GUIView;
-import za.co.wethinkcode.swingy.view.HeroSelectionScreenPanel;
-import za.co.wethinkcode.swingy.view.HomeScreenPanel;
+import za.co.wethinkcode.swingy.view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,22 +32,11 @@ public class GUIController {
         switchPanelInMainWindow(confirmPreviousGameScreenPanel);
     }
 
-//    public void showPrevHomeScreen() {
-//        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
-//        HeroSelectionScreenController heroSelectionScreenController
-//                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
-//        switchPanelInMainWindow(heroSelectionScreenPanel);
-//    }
-
     public void showHomeScreen() {
         HomeScreenPanel homeScreenPanel = new HomeScreenPanel();
         HomeScreenController homeScreenController
                 = new HomeScreenController(this, homeScreenPanel);
         switchPanelInMainWindow(homeScreenPanel);
-    }
-
-    private void switchPanelInMainWindow(JPanel panel) {
-        guiView.switchPanel(panel);
     }
 
     public void showHeroInfoScreen() {
@@ -59,5 +45,17 @@ public class GUIController {
                 = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
         switchPanelInMainWindow(heroSelectionScreenPanel);
     }
-    
+
+    public void loadStage() {
+        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+        HeroSelectionScreenController heroSelectionScreenController
+                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
+        ShowStageScreenPanel showStageScreenPanel = new ShowStageScreenPanel();
+        switchPanelInMainWindow(showStageScreenPanel);
+    }
+
+    private void switchPanelInMainWindow(JPanel panel) {
+        guiView.switchPanel(panel);
+    }
+
 }
