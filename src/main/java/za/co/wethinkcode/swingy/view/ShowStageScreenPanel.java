@@ -6,8 +6,6 @@ import java.awt.*;
 public class ShowStageScreenPanel extends JPanel {
     public ShowStageScreenPanel() {
         setBackground(Color.LIGHT_GRAY);
-
-
     }
 
     public void paint(Graphics g) {

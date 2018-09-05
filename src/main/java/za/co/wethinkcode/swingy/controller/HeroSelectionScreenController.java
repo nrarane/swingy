@@ -15,7 +15,7 @@ public class HeroSelectionScreenController {
         this.heroSelectionScreenPanel = heroSelectionScreenPanel;
         this.guiController = guiController;
         heroSelectionScreenPanel.previousScreenActionListener(btnPreviousScreenListener);
-//        heroSelectionScreenPanel.showHeroInfoActionListener(showHeroInfo);
+        heroSelectionScreenPanel.showHeroInfoActionListener(showHeroInfo);
         heroSelectionScreenPanel.startGameActionListener(startGame);
 
     }
@@ -27,12 +27,18 @@ public class HeroSelectionScreenController {
         }
     };
 
-//    ActionListener showHeroInfo = new ActionListener() {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            guiController.showHeroInfoScreen();
-//        }
-//    };
+    ActionListener showHeroInfo = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (int i = 0; i < heroSelectionScreenPanel.heroBtn.length; i++) {// using for loop to scan buttons
+                if (heroSelectionScreenPanel.heroBtn[i] == e.getSource()) { // the button[i] is being pressed
+                    heroSelectionScreenPanel.heroInfo.setText(heroSelectionScreenPanel.buttonName[i]); // set text accordingly
+                    break;
+                }
+            }
+//            heroSelectionScreenPanel.heroInfo.setText("Hope this will work");
+        }
+    };
 
     ActionListener startGame = new ActionListener() {
         @Override

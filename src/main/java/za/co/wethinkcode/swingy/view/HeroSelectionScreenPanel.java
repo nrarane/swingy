@@ -3,45 +3,38 @@ package za.co.wethinkcode.swingy.view;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HeroSelectionScreenPanel extends JPanel {
     JLabel label = new JLabel("Name: ");
     JTextField inputName = new JTextField(15);
-    JButton heroOne = new JButton("Hero 1");
-    JButton heroTwo = new JButton("Hero 2");
-    JButton heroThree = new JButton("Hero 3");
+    public String buttonName[] = {"HERO 1", "HERO 2", "HERO 73"};
+    public JButton heroBtn[] = new JButton[3];
+
+//    JButton heroOne = new JButton("Hero 1");
+//    JButton heroTwo = new JButton("Hero 2");
+//    JButton heroThree = new JButton("Hero 3");
+
     JButton previousScr = new JButton("Previous Screen");
     JButton startGame = new JButton("Start Game");
-    JTextArea heroInfo = new JTextArea(10, 80);
+    public final JTextArea heroInfo = new JTextArea(10, 80);
+
 
     public HeroSelectionScreenPanel() {
         setBackground(Color.DARK_GRAY);
 
         add(label);
         add(inputName);
-        add(heroOne);
-        add(heroTwo);
-        add(heroThree);
+
+        for (int i = 0; i < heroBtn.length; i++) {
+            heroBtn[i] = new JButton(buttonName[i]);
+            add(heroBtn[i]);
+        }
+
         add(heroInfo);
         add(startGame);
         add(previousScr);
-
-//        String pt1 = "<html><body width='";
-//        String pt2 =
-//                "'><h1>Label Width</h1>" +
-//                        "<p>Many Swing components support HTML 3.2 &amp;" +
-//                        " (simple) CSS.  By setting a body width we can cause the " +
-//                        " component to find the natural height needed to display" +
-//                        " the component.<br><br>" +
-//                        "<p>The body width in this text is set to " +
-//                        "";
-//        String pt3 = " pixels.";
-//
-//        int width = 175;
-//        String s = pt1 + width + pt2 + width + pt3 ;
-//
-//        JOptionPane.showMessageDialog(null, s);
 
     }
 
@@ -49,8 +42,13 @@ public class HeroSelectionScreenPanel extends JPanel {
         previousScr.addActionListener(btn);
     }
 
-    public void showHeroInfoActionListener(ActionListener showHeroInfo) {
-        heroOne.addActionListener(showHeroInfo);
+    public void showHeroInfoActionListener(ActionListener e) {
+//        heroOne.addActionListener(showHeroInfo);
+        for (int i = 0; i < heroBtn.length; i++) {
+
+            heroBtn[i].addActionListener(e);
+
+        }
     }
 
     public void startGameActionListener(ActionListener startGame) {

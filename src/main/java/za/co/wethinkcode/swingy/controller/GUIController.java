@@ -39,12 +39,12 @@ public class GUIController {
         switchPanelInMainWindow(homeScreenPanel);
     }
 
-    public void showHeroInfoScreen() {
-        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
-        HeroSelectionScreenController heroSelectionScreenController
-                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
-        switchPanelInMainWindow(heroSelectionScreenPanel);
-    }
+//    public void displayHeroInfo() {
+//        HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
+//        HeroSelectionScreenController heroSelectionScreenController
+//                = new HeroSelectionScreenController(this, heroSelectionScreenPanel);
+//
+//    }
 
     public void loadStage() {
         HeroSelectionScreenPanel heroSelectionScreenPanel = new HeroSelectionScreenPanel();
