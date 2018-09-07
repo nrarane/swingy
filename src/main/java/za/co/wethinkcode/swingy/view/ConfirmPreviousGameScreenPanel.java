@@ -5,6 +5,6 @@ import java.awt.*;
 
 public class ConfirmPreviousGameScreenPanel extends JPanel {
     public ConfirmPreviousGameScreenPanel() {
-        setBackground(Color.RED);
+        setBackground(Color.MAGENTA);
     }
 }

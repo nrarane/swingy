@@ -10,7 +10,8 @@ public class HeroSelectionScreenController {
     HeroSelectionScreenPanel heroSelectionScreenPanel;
     GUIController guiController;
 
-    public HeroSelectionScreenController(GUIController guiController, HeroSelectionScreenPanel heroSelectionScreenPanel) {
+    public HeroSelectionScreenController(GUIController guiController, HeroSelectionScreenPanel heroSelectionScreenPanel)
+    {
 
         this.heroSelectionScreenPanel = heroSelectionScreenPanel;
         this.guiController = guiController;

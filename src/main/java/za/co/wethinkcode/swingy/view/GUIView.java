@@ -1,10 +1,14 @@
 package za.co.wethinkcode.swingy.view;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GUIView {
-    JFrame mainWndow = new JFrame();
+
+    static JFrame mainWndow = new JFrame();
 
     public GUIView() {
         mainWndow.setVisible(true);
@@ -16,4 +20,5 @@ public class GUIView {
         mainWndow.setContentPane(panel);
         mainWndow.setVisible(true);
     }
+
 }
