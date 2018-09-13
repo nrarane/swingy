@@ -10,6 +10,8 @@ public class ShowStageScreenPanel extends JPanel {
     int height = 0;
     int sizeOfSq = 0;
 
+    private Point playerStartPt;
+
     int heightOfScreen = GUIView.mainWndow.getHeight() - 25;
 
     public ShowStageScreenPanel() {
@@ -21,9 +23,19 @@ public class ShowStageScreenPanel extends JPanel {
         width = (lvl - 1) * 5 + 10 - (lvl % 2);
         sizeOfSq = (int) Math.floor( heightOfScreen / width);
 
+        int initColumn = width / 2;
+        int initRow = height / 2;
+
+        playerStartPt = new Point(initColumn, initRow);
+
         for (int x = 0; x < width; x += 1)
             for (int y = 0; y < height; y += 1)
                 g.drawRect(x * sizeOfSq, y * sizeOfSq, sizeOfSq,sizeOfSq);
+
+        g.fillRect(initColumn * sizeOfSq, initRow * sizeOfSq, sizeOfSq, sizeOfSq);
+
     }
+
+
 
 }
