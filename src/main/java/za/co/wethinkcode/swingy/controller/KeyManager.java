@@ -5,24 +5,29 @@ import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
 
-    private boolean[] keys;
-
-    public KeyManager() {
-        keys = new boolean[256];
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {
-
+        new KeyManager(e, "PLAYER MOVED: ");
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        keys[e.getKeyCode()] = true;
+        new KeyManager(e, "PLAYER MOVED: ");
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        keys[e.getKeyCode()] = false;
+        new KeyManager(e, "PLAYER MOVED: ");
     }
+
+    public KeyManager(KeyEvent e, String keyPressed) {
+        int id = e.getID();
+        String keyString;
+
+        if (id == KeyEvent.KEY_TYPED) {
+            char c = e.getKeyChar();
+            keyString = "pressed : '" + c + "'";
+        }
+    }
+
 }
