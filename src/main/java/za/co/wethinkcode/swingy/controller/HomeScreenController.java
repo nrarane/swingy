@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomeScreenController {
+
     HomeScreenPanel homeScreenPanel;
     GUIController guiController;
 
@@ -31,4 +32,5 @@ public class HomeScreenController {
             guiController.loadPreviousGame();
         }
     };
+
 }

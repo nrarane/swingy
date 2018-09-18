@@ -15,7 +15,6 @@ public class GUIView {
         mainWndow.setSize(new Dimension(1000, 800));
     }
 
-
     public void switchPanel(JPanel panel) {
         mainWndow.setContentPane(panel);
         mainWndow.setVisible(true);

@@ -7,6 +7,9 @@ public class GameManager {
         if (interfaceType == EnumInterfaceType.GUI) {
             GUIController controller = new GUIController();
             controller.startGame();
+        } else if (interfaceType == EnumInterfaceType.CLI) {
+            CLIController controller = new CLIController();
+            controller.startGame();
         }
     }
 }
