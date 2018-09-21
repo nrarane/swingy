@@ -18,6 +18,7 @@ public class GUIView {
     public void switchPanel(JPanel panel) {
         mainWndow.setContentPane(panel);
         mainWndow.setVisible(true);
+        mainWndow.setResizable(false);
     }
 
 }
