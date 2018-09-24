@@ -17,7 +17,8 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
     ////////
 
 
-
+    private boolean[] keys;
+    public boolean up, down, left, right;
     //draw grid layout for the stage
     int lvl = 1;
     int dimension = 0;
@@ -26,7 +27,30 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
     private Point playerStartPt;
     int heightOfScreen = GUIView.mainWndow.getHeight() - 25;
 
-    public void paint(Graphics g, Point currPosition) {
+    //constructor
+    public ShowStageScreenPanel() {
+
+        keys = new boolean[256];
+
+        this.setLayout(new BorderLayout());
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BorderLayout());
+        typingArea = new JTextField(20);
+        typingArea.addKeyListener(this);
+
+        displayArea = new JTextArea();
+        displayArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(displayArea);
+//        scrollPane.setPreferredSize(new Dimension(375, 125));
+
+        textPanel.add(typingArea, BorderLayout.PAGE_START);
+        textPanel.add(scrollPane, BorderLayout.CENTER);
+
+        this.add(textPanel, BorderLayout.EAST);
+
+    }
+
+    public void paint(Graphics g/*, Point currPosition*/) {
 
         levelUp(2451);
         System.out.print(lvl);
@@ -35,7 +59,7 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
         int initColumn = gridSize(lvl) / 2;
         int initRow = gridSize(lvl) / 2;
 
-        playerStartPt = new Point(initColumn, initRow);
+//        playerStartPt = new Point(initColumn, initRow);
 
         for (int x = 0; x < gridSize(lvl); x += 1)
             for (int y = 0; y < gridSize(lvl); y += 1)
@@ -64,30 +88,6 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
     }
     /////grid size done
 
-    //constructor
-    public ShowStageScreenPanel() {
-
-
-        this.setLayout(new BorderLayout());
-
-        JPanel textPanel = new JPanel();
-        textPanel.setLayout(new BorderLayout());
-
-        typingArea = new JTextField(20);
-        typingArea.addKeyListener(this);
-
-        displayArea = new JTextArea();
-        displayArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(displayArea);
-//        scrollPane.setPreferredSize(new Dimension(375, 125));
-
-        textPanel.add(typingArea, BorderLayout.PAGE_START);
-        textPanel.add(scrollPane, BorderLayout.CENTER);
-
-        this.add(textPanel, BorderLayout.EAST);
-
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         //Clear the text components.
@@ -100,35 +100,58 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 
     @Override
     public void keyTyped(KeyEvent e) {
-        displayInfo(e, "KEY TYPED: ");
+//        keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        displayInfo(e, "KEY PRESSED: ");
+        keys[e.getKeyCode()] = true;
+        displayInfo(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        displayInfo(e, "KEY RELEASED: ");
+        keys[e.getKeyCode()] = false;
+        //displayInfo(e);
     }
 
-    private void displayInfo(KeyEvent e, String s) {
-        int id = e.getID();
-        String keyString;
-        if (id == KeyEvent.KEY_TYPED) {
-            char c = e.getKeyChar();
-            keyString = "key character = '" + c + "'";
+    private void displayInfo(KeyEvent e/*, int col, int row*/) {
+//        int id = e.getID();
+        String keyString = null;
+        char c = e.getKeyChar();
+
+        up = keys[KeyEvent.VK_W];
+        down = keys[KeyEvent.VK_S];
+        left = keys[KeyEvent.VK_A];
+        right = keys[KeyEvent.VK_D];
+
+        if (up) {
+
+            keyString = "You Pressed = '" + c + "'";
+
+        } else if (left) {
+
+            keyString = "You Pressed = '" + c + "'";
+
+        } else if (right) {
+
+            keyString = "You Pressed = '" + c + "'";
+
+        } else if (down) {
+
+            keyString = "You Pressed = '" + c + "'";
+
         } else {
-            int keyCode = e.getKeyCode();
-            keyString = "key code = " + keyCode
-                    + " ("
-                    + KeyEvent.getKeyText(keyCode)
-                    + ")";
+            keyString = "Please press one of the following keys {W,A,S,D}";
+//            int keyCode = e.getKeyCode();
+//            keyString = "key code = " + keyCode
+//                    + " ("
+//                    + KeyEvent.getKeyText(keyCode)
+//                    + ")";
         }
 
-        displayArea.append(s + newline
-                + "    " + keyString + newline);
+        displayArea.append(keyString + newline);
+//                + "    " + keyString + newline);
         displayArea.setCaretPosition(displayArea.getDocument().getLength());
     }
 
