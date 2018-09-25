@@ -18,11 +18,17 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 
 
     private boolean[] keys;
-    public boolean up, down, left, right;
+    public boolean up, down, left, right, fight, run;
     //draw grid layout for the stage
     int lvl = 1;
     int dimension = 0;
     int sizeOfSq = 0;
+
+    ///////
+    int initColumn = gridSize(lvl) / 2;
+    int initRow = gridSize(lvl) / 2;
+    int row, col;
+    ///////
 
     private Point playerStartPt;
     int heightOfScreen = GUIView.mainWndow.getHeight() - 25;
@@ -50,14 +56,20 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 
     }
 
+    public void pos(Graphics g) {
+
+        g.fillRect(initColumn * sizeOfSq, initRow * sizeOfSq, sizeOfSq, sizeOfSq);
+
+    }
+
     public void paint(Graphics g/*, Point currPosition*/) {
 
-        levelUp(2451);
+//        levelUp(2451);
         System.out.print(lvl);
         sizeOfSq = (int) Math.floor( heightOfScreen / gridSize(lvl));
 
-        int initColumn = gridSize(lvl) / 2;
-        int initRow = gridSize(lvl) / 2;
+//        int initColumn = gridSize(lvl) / 2;
+//        int initRow = gridSize(lvl) / 2;
 
 //        playerStartPt = new Point(initColumn, initRow);
 
@@ -65,7 +77,8 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
             for (int y = 0; y < gridSize(lvl); y += 1)
                 g.drawRect(x * sizeOfSq, y * sizeOfSq, sizeOfSq,sizeOfSq);
 
-        g.fillRect(initColumn * sizeOfSq, initRow * sizeOfSq, sizeOfSq, sizeOfSq);
+//        System.out.println("row: " + initRow + "\ncol: " + initColumn);
+//        g.fillRect(initColumn * sizeOfSq, initRow * sizeOfSq, sizeOfSq, sizeOfSq);
 
     }
     /////draws grid layout for the stage end
@@ -119,40 +132,52 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 //        int id = e.getID();
         String keyString = null;
         char c = e.getKeyChar();
+        Graphics g = getGraphics();
 
         up = keys[KeyEvent.VK_W];
         down = keys[KeyEvent.VK_S];
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
+        fight = keys[KeyEvent.VK_F];
+        run = keys[KeyEvent.VK_R];
 
         if (up) {
 
             keyString = "You Pressed = '" + c + "'";
+            initRow -= 1;
+            g.clearRect((initRow + 1) * sizeOfSq, initColumn * sizeOfSq, sizeOfSq, sizeOfSq);
+            pos(g);
 
         } else if (left) {
 
             keyString = "You Pressed = '" + c + "'";
+            initColumn -= 1;
+            g.clearRect(initRow * sizeOfSq, (initColumn + 1) * sizeOfSq, sizeOfSq, sizeOfSq);
+            pos(g);
 
         } else if (right) {
 
             keyString = "You Pressed = '" + c + "'";
+            initColumn += 1;
+            g.clearRect(initRow * sizeOfSq, (initColumn - 1) * sizeOfSq, sizeOfSq, sizeOfSq);
+            pos(g);
 
         } else if (down) {
 
             keyString = "You Pressed = '" + c + "'";
+            initRow += 1;
+            g.clearRect((initRow - 1) * sizeOfSq, initColumn * sizeOfSq, sizeOfSq, sizeOfSq);
+            pos(g);
 
         } else {
+
             keyString = "Please press one of the following keys {W,A,S,D}";
-//            int keyCode = e.getKeyCode();
-//            keyString = "key code = " + keyCode
-//                    + " ("
-//                    + KeyEvent.getKeyText(keyCode)
-//                    + ")";
+
         }
 
         displayArea.append(keyString + newline);
-//                + "    " + keyString + newline);
         displayArea.setCaretPosition(displayArea.getDocument().getLength());
+
     }
 
 }
