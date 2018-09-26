@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.BorderLayout;
+import java.util.Random;
 
 public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionListener {
 
@@ -27,7 +28,6 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
     ///////
     int initColumn = gridSize(lvl) / 2;
     int initRow = gridSize(lvl) / 2;
-    int row, col;
     ///////
 
     private Point playerStartPt;
@@ -62,6 +62,17 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 
     }
 
+    //draw multiple villains in random areas
+    public void villains(Graphics g) {
+
+        Random rnd = new Random();
+        int rndRow = rnd.nextInt(gridSize(lvl));
+        int rndCol = rnd.nextInt(gridSize(lvl));
+        g.setColor(Color.RED);
+        g.fillRect(rndCol * sizeOfSq, rndRow * sizeOfSq, sizeOfSq, sizeOfSq);
+
+    }
+
     public void paint(Graphics g/*, Point currPosition*/) {
 
 //        levelUp(2451);
@@ -77,8 +88,10 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
             for (int y = 0; y < gridSize(lvl); y += 1)
                 g.drawRect(x * sizeOfSq, y * sizeOfSq, sizeOfSq,sizeOfSq);
 
+        for (int i = 0; i < gridSize(lvl); i++) {
+            villains(g);
+        }
 //        System.out.println("row: " + initRow + "\ncol: " + initColumn);
-//        g.fillRect(initColumn * sizeOfSq, initRow * sizeOfSq, sizeOfSq, sizeOfSq);
 
     }
     /////draws grid layout for the stage end
@@ -128,6 +141,11 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
         //displayInfo(e);
     }
 
+    ///////////////////
+    //fight or flight//
+    public void decide() { }
+    ///////////////////
+
     private void displayInfo(KeyEvent e/*, int col, int row*/) {
 //        int id = e.getID();
         String keyString = null;
@@ -145,28 +163,28 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 
             keyString = "You Pressed = '" + c + "'";
             initRow -= 1;
-            g.clearRect((initRow + 1) * sizeOfSq, initColumn * sizeOfSq, sizeOfSq, sizeOfSq);
+            g.clearRect(initColumn * sizeOfSq,(initRow + 1) * sizeOfSq, sizeOfSq, sizeOfSq);
             pos(g);
 
         } else if (left) {
 
             keyString = "You Pressed = '" + c + "'";
             initColumn -= 1;
-            g.clearRect(initRow * sizeOfSq, (initColumn + 1) * sizeOfSq, sizeOfSq, sizeOfSq);
+            g.clearRect( (initColumn + 1) * sizeOfSq,initRow * sizeOfSq, sizeOfSq, sizeOfSq);
             pos(g);
 
         } else if (right) {
 
             keyString = "You Pressed = '" + c + "'";
             initColumn += 1;
-            g.clearRect(initRow * sizeOfSq, (initColumn - 1) * sizeOfSq, sizeOfSq, sizeOfSq);
+            g.clearRect((initColumn - 1) * sizeOfSq,initRow * sizeOfSq, sizeOfSq, sizeOfSq);
             pos(g);
 
         } else if (down) {
 
             keyString = "You Pressed = '" + c + "'";
             initRow += 1;
-            g.clearRect((initRow - 1) * sizeOfSq, initColumn * sizeOfSq, sizeOfSq, sizeOfSq);
+            g.clearRect(initColumn * sizeOfSq, (initRow - 1) * sizeOfSq, sizeOfSq, sizeOfSq);
             pos(g);
 
         } else {
