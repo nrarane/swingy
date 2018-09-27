@@ -1,5 +1,7 @@
 package za.co.wethinkcode.swingy.view;
 
+import za.co.wethinkcode.swingy.model.character.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -143,7 +145,19 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
 
     ///////////////////
     //fight or flight//
-    public void decide() { }
+    public void decide(KeyEvent e) {
+        fight = keys[KeyEvent.VK_F];
+        run = keys[KeyEvent.VK_R];
+        if (fight) {
+            if (Hero.getWinningMessage() == "be bop bop beep, you're dead") {
+                return;
+            }
+        } else if (run) {
+            return;
+        } else {
+            return;
+        }
+    }
     ///////////////////
 
     private void displayInfo(KeyEvent e/*, int col, int row*/) {
@@ -156,8 +170,8 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
         down = keys[KeyEvent.VK_S];
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
-        fight = keys[KeyEvent.VK_F];
-        run = keys[KeyEvent.VK_R];
+//        fight = keys[KeyEvent.VK_F];
+//        run = keys[KeyEvent.VK_R];
 
         if (up) {
 
