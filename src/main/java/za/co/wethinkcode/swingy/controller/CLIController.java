@@ -9,19 +9,13 @@ public class CLIController {
     CLIView cliView;
 
     public void startGame() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
                 cliView = new CLIView();
 //                showHomeScreen();
-            }
-        });
+//            }
+//        });
     }
 
-//    private void showHomeScreen() {
-//        InitialScreen initialScreen = new InitialScreen();
-//        HomeScreenController homeScreenController
-//                = new HomeScreenController(this, initialScreen);
-//        switchPanelInMainWindow(initialScreen);
-//    }
 }

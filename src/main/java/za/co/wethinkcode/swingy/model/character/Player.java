@@ -10,9 +10,9 @@ public class Player {
     public int attack;
     public int defence;
     public int hitPoints;
-    public Position position;
+    public int position;
 
-    public Player(String name, int level, int experience, int attack, int defence, int hitPoints, Position position) {
+    public Player(String name, int level, int experience, int attack, int defence, int hitPoints, int position) {
         this.name = name;
         this.level = level;
         this.experience = experience;
@@ -46,7 +46,7 @@ public class Player {
         this.hitPoints = hitPoints;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
