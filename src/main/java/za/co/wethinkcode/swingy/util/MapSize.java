@@ -2,7 +2,7 @@ package za.co.wethinkcode.swingy.util;
 
 public class MapSize {
 
-    public int mapSize(int lvl) {
+    public static int mapSize(int lvl) {
         return (lvl - 1) * 5 + 10 - (lvl % 2);
     }
 

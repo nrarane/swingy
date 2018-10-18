@@ -3,6 +3,8 @@ package za.co.wethinkcode.swingy.view;
 import za.co.wethinkcode.swingy.model.character.Hero;
 
 import javax.swing.text.Position;
+import java.awt.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CLIView {
@@ -53,11 +55,43 @@ public class CLIView {
             Scanner characterInput = new Scanner(System.in);
             int character = characterInput.nextInt();
 
+            Hero[] heroes = {hero, hero2, hero3};
+            Hero heroSelected = heroes[character - 1];
+
+            System.out.println("name: " + heroSelected.name + "\n" +
+                    "attack: " + heroSelected.attack + "\n" +
+                    "hp: " + heroSelected.hitPoints + "\n" +
+                    "xp: " + heroSelected.experience + "\n" +
+                    "defence: " + heroSelected.defence );
+
+            System.out.println("1. Continue\n2. Back\n3. Exit");
+
+            Scanner choice = new Scanner(System.in);
+            int chose = choice.nextInt();
+
+            String[][] gridd = new String[6][6];
+
+            if ( chose == 1 ) {
+                for (int i = 0; i < 6/*mapSize*/; i++ ) {
+                    for (int j = 0; j < 6/*mapSize*/; j++) {
+                        gridd[i][j] = "*";
+                        System.out.print(gridd[i][j] + " ");
+                    }
+                    System.out.println("");
+                }
+            }
+//            System.out.println(Arrays.deepToString(gridd));
+
         } else if (option == 2) {
+
             System.out.print("You chose to load a game");
-        } if (option == 3) {
+
+        } else if (option == 3) {
+
             System.exit(0);
+
         }
+
     }
 
 }
