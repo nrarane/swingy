@@ -69,18 +69,64 @@ public class CLIView {
             Scanner choice = new Scanner(System.in);
             int chose = choice.nextInt();
 
-            String[][] gridd = new String[6][6];
+            String[][] gridd = new String[5][5];
 
             if ( chose == 1 ) {
-                for (int i = 0; i < 6/*mapSize*/; i++ ) {
-                    for (int j = 0; j < 6/*mapSize*/; j++) {
+                for (int i = 0; i < 5/*mapSize*/; i++ ) {
+                    for (int j = 0; j < 5/*mapSize*/; j++) {
                         gridd[i][j] = "*";
                         System.out.print(gridd[i][j] + " ");
                     }
                     System.out.println("");
                 }
             }
-//            System.out.println(Arrays.deepToString(gridd));
+
+            System.out.println("");
+            Point heroPos = new Point(5/2, 5/2);
+
+            for (int i = 0; i < 5/*mapSize*/; i++ ) {
+                for (int j = 0; j < 5/*mapSize*/; j++) {
+                    gridd[i][j] = "*";
+                    gridd[heroPos.x][heroPos.y] = "H";
+                    System.out.print(gridd[i][j] + " ");
+                }
+                System.out.println("");
+            }
+
+            System.out.println("");
+
+            System.out.println("A: Left\tS: Down\tD: Right\tW: Up\nmove: ");
+
+            Scanner moveHero = new Scanner(System.in);
+            String moveDirection = moveHero.next();
+            int quitSave = moveHero.nextInt();
+
+            switch (moveDirection) {
+                case "W":
+                case "w":
+                    heroPos.y = heroPos.y - 1;
+                    break;
+                case "A":
+                case "a":
+                    heroPos.x = heroPos.x - 1;
+                    break;
+                case "S":
+                case "s":
+                    heroPos.y = heroPos.y + 1;
+                    break;
+                case "D":
+                case "d":
+                    heroPos.x = heroPos.x + 1;
+                    break;
+                default:
+                    break;
+            }
+
+            if (quitSave == 1) {
+                System.out.println("you have gone to previous screen");
+            } else if (quitSave == 2) {
+                System.exit(0);
+            }
 
         } else if (option == 2) {
 
