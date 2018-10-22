@@ -71,25 +71,23 @@ public class CLIView {
 
             String[][] gridd = new String[5][5];
 
-//            if ( chose == 1 ) {
-//                drawGrid();
-////                for (int i = 0; i < 5/*mapSize*/; i++ ) {
-////                    for (int j = 0; j < 5/*mapSize*/; j++) {
-////                        gridd[i][j] = "*";
-////                        System.out.print(gridd[i][j] + " ");
-////                    }
-////                    System.out.println("");
-////                }
-//            }
-
             System.out.println();
             Point heroPos = new Point(5/2, 5/2);
-
 
             movePlayer("", heroPos);
 
             System.out.println();
             while ((heroPos.x < 5 && heroPos.x > 0) || (heroPos.y > 0 && heroPos.y < 5)) {
+
+//                int enemyNum = 0;
+//                while (enemyNum < 5) {
+//                    Point enemyPos = randXYPoint();
+//                    initEnemies(enemyPos);
+//                    enemyNum++;
+//                }
+//                if ((heroPos.x < 5 && heroPos.x > 0) || (heroPos.y > 0 && heroPos.y < 5)) {
+//
+//                }
 
                 System.out.print("A: Left\nS: Down\nD: Right\nW: Up\n\n1: QuitSave\n2: Quit\n\nYour move: ");
 
@@ -108,21 +106,17 @@ public class CLIView {
                 } else if (moveHero.hasNext()) {
                     moveDirection = moveHero.next();
 
-                    switch (moveDirection) {
+                    switch (moveDirection.toUpperCase()) {
                         case "W":
-                        case "w":
                             heroPos.x = heroPos.x - 1;
                             break;
                         case "A":
-                        case "a":
                             heroPos.y = heroPos.y - 1;
                             break;
                         case "S":
-                        case "s":
                             heroPos.x = heroPos.x + 1;
                             break;
                         case "D":
-                        case "d":
                             heroPos.y = heroPos.y + 1;
                             break;
                         default:
@@ -130,10 +124,8 @@ public class CLIView {
                     }
 
                 }
-
-//            while ((heroPos.x < 5 && heroPos.x > 0) || (heroPos.y > 0 && heroPos.y < 5)) {
                 movePlayer(moveDirection, heroPos);
-//            }
+
             }
 
         } else if (option == 2) {
@@ -171,6 +163,31 @@ public class CLIView {
             }
             System.out.println();
         }
+    }
+
+    public void initEnemies(Point enemyPos) {
+
+//        enemyPos = randXYPoint();
+        String[][] board = new String[5][5];
+
+        for (int i = 0; i < 5/*mapSize*/; i++ ) {
+            for (int j = 0; j < 5/*mapSize*/; j++) {
+                board[i][j] = "*";
+                board[enemyPos.x][enemyPos.y] = "E";
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public Point randXYPoint(){
+        int min = 1;
+        int max = 5;
+
+        double xValue = min + Math.random() * (max - min);
+        double yValue = min + Math.random() * (max - min);
+        return new Point((int) xValue, (int) yValue);
     }
 
 }
