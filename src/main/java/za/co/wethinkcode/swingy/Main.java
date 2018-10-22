@@ -4,7 +4,6 @@ import za.co.wethinkcode.swingy.controller.GameManager;
 
 public class Main {
 
-
     public static void main(String args[]) {
         GameManager gameManager = new GameManager();
         EnumInterfaceType interfaceType = getInterfaceType(args);
@@ -15,4 +14,5 @@ public class Main {
         //Write Logic to get the interface type
         return EnumInterfaceType.GUI;
     }
+
 }

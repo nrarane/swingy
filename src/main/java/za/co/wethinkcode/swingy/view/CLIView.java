@@ -19,8 +19,8 @@ public class CLIView {
         System.out.println("*        Welcome to swingy!        *");
         System.out.println("*       Show us what you got       *");
         System.out.println("*              Created by: nrarane *");
-        System.out.println("************************************");
-        System.out.println("");
+        System.out.println("************************************\n");
+
         System.out.println("What would you like to do?\n");
         System.out.println("1. New Game\n2. Load Game\n3. Exit\n");
 
@@ -35,7 +35,7 @@ public class CLIView {
              String playerName;
              do {
 
-                 System.out.print("Enter your name:");
+                 System.out.print("Enter your name: ");
                  inputPlayerName = new Scanner(System.in);
                  playerName = inputPlayerName.next();
 
@@ -71,61 +71,69 @@ public class CLIView {
 
             String[][] gridd = new String[5][5];
 
-            if ( chose == 1 ) {
-                for (int i = 0; i < 5/*mapSize*/; i++ ) {
-                    for (int j = 0; j < 5/*mapSize*/; j++) {
-                        gridd[i][j] = "*";
-                        System.out.print(gridd[i][j] + " ");
-                    }
-                    System.out.println("");
-                }
-            }
+//            if ( chose == 1 ) {
+//                drawGrid();
+////                for (int i = 0; i < 5/*mapSize*/; i++ ) {
+////                    for (int j = 0; j < 5/*mapSize*/; j++) {
+////                        gridd[i][j] = "*";
+////                        System.out.print(gridd[i][j] + " ");
+////                    }
+////                    System.out.println("");
+////                }
+//            }
 
-            System.out.println("");
+            System.out.println();
             Point heroPos = new Point(5/2, 5/2);
 
-            for (int i = 0; i < 5/*mapSize*/; i++ ) {
-                for (int j = 0; j < 5/*mapSize*/; j++) {
-                    gridd[i][j] = "*";
-                    gridd[heroPos.x][heroPos.y] = "H";
-                    System.out.print(gridd[i][j] + " ");
+
+            movePlayer("", heroPos);
+
+            System.out.println();
+            while ((heroPos.x < 5 && heroPos.x > 0) || (heroPos.y > 0 && heroPos.y < 5)) {
+
+                System.out.print("A: Left\nS: Down\nD: Right\nW: Up\n\n1: QuitSave\n2: Quit\n\nYour move: ");
+
+                Scanner moveHero = new Scanner(System.in);
+                String moveDirection = null;
+                int quitSave = 0;
+
+                if (moveHero.hasNextBigInteger()) {
+                    quitSave = moveHero.nextInt();
+
+                    if (quitSave == 1) {
+                        System.out.println("you have gone to previous screen");
+                    } else if (quitSave == 2) {
+                        System.exit(0);
+                    }
+                } else if (moveHero.hasNext()) {
+                    moveDirection = moveHero.next();
+
+                    switch (moveDirection) {
+                        case "W":
+                        case "w":
+                            heroPos.x = heroPos.x - 1;
+                            break;
+                        case "A":
+                        case "a":
+                            heroPos.y = heroPos.y - 1;
+                            break;
+                        case "S":
+                        case "s":
+                            heroPos.x = heroPos.x + 1;
+                            break;
+                        case "D":
+                        case "d":
+                            heroPos.y = heroPos.y + 1;
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
-                System.out.println("");
-            }
 
-            System.out.println("");
-
-            System.out.println("A: Left\tS: Down\tD: Right\tW: Up\nmove: ");
-
-            Scanner moveHero = new Scanner(System.in);
-            String moveDirection = moveHero.next();
-            int quitSave = moveHero.nextInt();
-
-            switch (moveDirection) {
-                case "W":
-                case "w":
-                    heroPos.y = heroPos.y - 1;
-                    break;
-                case "A":
-                case "a":
-                    heroPos.x = heroPos.x - 1;
-                    break;
-                case "S":
-                case "s":
-                    heroPos.y = heroPos.y + 1;
-                    break;
-                case "D":
-                case "d":
-                    heroPos.x = heroPos.x + 1;
-                    break;
-                default:
-                    break;
-            }
-
-            if (quitSave == 1) {
-                System.out.println("you have gone to previous screen");
-            } else if (quitSave == 2) {
-                System.exit(0);
+//            while ((heroPos.x < 5 && heroPos.x > 0) || (heroPos.y > 0 && heroPos.y < 5)) {
+                movePlayer(moveDirection, heroPos);
+//            }
             }
 
         } else if (option == 2) {
@@ -138,6 +146,31 @@ public class CLIView {
 
         }
 
+    }
+
+    public void drawGrid() {
+        String[][] board = new String[5][5];
+
+        for (int i = 0; i < 5/*mapSize*/; i++ ) {
+            for (int j = 0; j < 5/*mapSize*/; j++) {
+                board[i][j] = "*";
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void movePlayer(String direction, Point heroPos)  {
+        String[][] board = new String[5][5];
+
+        for (int i = 0; i < 5/*mapSize*/; i++ ) {
+            for (int j = 0; j < 5/*mapSize*/; j++) {
+                board[i][j] = "*";
+                board[heroPos.x][heroPos.y] = "H";
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
 }
