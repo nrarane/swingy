@@ -4,6 +4,7 @@ import za.co.wethinkcode.swingy.model.character.Hero;
 
 import javax.swing.text.Position;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -78,7 +79,10 @@ public class CLIView {
                     Point enemyPos = randXYPoint();
                 }
 
-                movePlayer("", heroPos);
+                String[][] board = new String[5][5];
+                drawGrid(board);
+//                movePlayer("", heroPos, board);
+//                initEnemy(board);
 
                 System.out.println();
                 while ((heroPos.x > -1 && heroPos.x < 5) && (heroPos.y > -1 && heroPos.y < 5)) {
@@ -99,6 +103,7 @@ public class CLIView {
                         }
                     } else if (moveHero.hasNext()) {
                         moveDirection = moveHero.next();
+
 
                         switch (moveDirection.toUpperCase()) {
                             case "W":
@@ -122,8 +127,10 @@ public class CLIView {
                         System.out.println("Change stage. \nIncrease level(dependent on the hp accumulated)\n");
                         break;
                     }
-                    movePlayer(moveDirection, heroPos);
-
+                    drawGrid(board);
+//                    movePlayer(moveDirection, heroPos, board);
+////                    initEnemy(board);
+//                    initEnemy(board);
                 }
 
             } else if (chose == 2) {
@@ -149,47 +156,60 @@ public class CLIView {
 
     }
 
-//    public void drawGrid() {
+    public void drawGrid(String[][] board) {
 //        String[][] board = new String[5][5];
-//
-//        for (int i = 0; i < 5/*mapSize*/; i++ ) {
-//            for (int j = 0; j < 5/*mapSize*/; j++) {
-//                board[i][j] = "*";
-//                System.out.print(board[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//    }
-
-    public void movePlayer(String direction, Point heroPos)  {
-        String[][] board = new String[5][5];
-        int count = 0;
 
         for (int i = 0; i < 5/*mapSize*/; i++ ) {
             for (int j = 0; j < 5/*mapSize*/; j++) {
                 board[i][j] = "*";
-                board[heroPos.x][heroPos.y] = "H";
-//                initEnemies(board);
                 System.out.print(board[i][j] + " ");
             }
             System.out.println();
         }
+    }
+
+    public void movePlayer(String direction, Point heroPos, String[][] board)  {
+//        board = new String[5][5];
+
+//        for (int i = 0; i < 5/*mapSize*/; i++ ) {
+//            for (int j = 0; j < 5/*mapSize*/; j++) {
+//                board[i][j] = "*";
+                board[heroPos.x][heroPos.y] = "H";
+                System.out.print(board[heroPos.x][heroPos.y]);
+//                initEnemy(board);
+//                System.out.print(board[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
 
     }
 
-    public void initEnemies(String[][] board) {
-
-//        int count = 0;
-//        enemyPos = randXYPoint();
-
-        for (int i = 0; i < 5/*mapSize*/; i++ ) {
-//            for (int j = 0; j < 5/*mapSize*/; j++) {
-            Point enemyPos = randXYPoint();
-//            System.out.println(enemyPos);
-            board[enemyPos.x][enemyPos.y] = "E";
-//            }
-
+    public void initEnemy(String[][] board)  {
+//        board = new String[5][5];
+        ArrayList<Point> points = new ArrayList<Point>();
+        int k = 0;
+        while (k < 5) {
+            if (randXYPoint() != new Point((int) 5/2, (int) 5/2)) {
+                points.add(randXYPoint());
+            } else {
+                continue;
+            }
+            k++;
         }
+
+//        System.out.println(points);
+
+//        for (int i = 0; i < 5/*mapSize*/; i++ ) {
+//            for (int j = 0; j < 5/*mapSize*/; j++) {
+
+                for ( Point point : points ) {
+                    board[point.x][point.y] = "E";
+                    System.out.print(board[point.x][point.y]);
+                }
+//                System.out.print(board[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
 
     }
 
