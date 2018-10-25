@@ -80,9 +80,19 @@ public class CLIView {
                 }
 
                 String[][] board = new String[5][5];
-                drawGrid(board);
-//                movePlayer("", heroPos, board);
-//                initEnemy(board);
+                ArrayList<Point> points = initEnemy(board);
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        drawGrid(board, i, j);
+                        for (Point point : points) {
+                            board[point.x][point.y] = "E";
+                        }
+//                        ;
+                        movePlayer("", heroPos, board);
+                        System.out.print(board[i][j] + " ");
+                    }
+                    System.out.println();
+                }
 
                 System.out.println();
                 while ((heroPos.x > -1 && heroPos.x < 5) && (heroPos.y > -1 && heroPos.y < 5)) {
@@ -127,9 +137,26 @@ public class CLIView {
                         System.out.println("Change stage. \nIncrease level(dependent on the hp accumulated)\n");
                         break;
                     }
-                    drawGrid(board);
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            drawGrid(board, i, j);
+                            movePlayer(moveDirection, heroPos, board);
+                            for (Point point : points) {
+                                board[point.x][point.y] = "E";
+                                if (heroPos.x == point.x) {
+                                    if (heroPos.y == point.y) {
+                                        String ANSI_RESET = "\u001B[0m";
+                                        String ANSI_RED = "\u001B[31m";
+                                        board[heroPos.x][heroPos.y] = ANSI_RED + "W" + ANSI_RESET;
+                                    }
+                                }
+                            }
+                            System.out.print(board[i][j] + " ");
+                        }
+                        System.out.println();
+                    }
+
 //                    movePlayer(moveDirection, heroPos, board);
-////                    initEnemy(board);
 //                    initEnemy(board);
                 }
 
@@ -156,36 +183,20 @@ public class CLIView {
 
     }
 
-    public void drawGrid(String[][] board) {
-//        String[][] board = new String[5][5];
+    public void drawGrid(String[][] board, int i, int j) {
 
-        for (int i = 0; i < 5/*mapSize*/; i++ ) {
-            for (int j = 0; j < 5/*mapSize*/; j++) {
-                board[i][j] = "*";
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
+        board[i][j] = ".";
+
     }
 
     public void movePlayer(String direction, Point heroPos, String[][] board)  {
-//        board = new String[5][5];
 
-//        for (int i = 0; i < 5/*mapSize*/; i++ ) {
-//            for (int j = 0; j < 5/*mapSize*/; j++) {
-//                board[i][j] = "*";
-                board[heroPos.x][heroPos.y] = "H";
-                System.out.print(board[heroPos.x][heroPos.y]);
-//                initEnemy(board);
-//                System.out.print(board[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
+        board[heroPos.x][heroPos.y] = "H";
 
     }
 
-    public void initEnemy(String[][] board)  {
-//        board = new String[5][5];
+    public ArrayList<Point> initEnemy(String[][] board)  {
+
         ArrayList<Point> points = new ArrayList<Point>();
         int k = 0;
         while (k < 5) {
@@ -197,19 +208,11 @@ public class CLIView {
             k++;
         }
 
-//        System.out.println(points);
-
-//        for (int i = 0; i < 5/*mapSize*/; i++ ) {
-//            for (int j = 0; j < 5/*mapSize*/; j++) {
-
-                for ( Point point : points ) {
-                    board[point.x][point.y] = "E";
-                    System.out.print(board[point.x][point.y]);
-                }
-//                System.out.print(board[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
+        for ( Point point : points ) {
+            board[point.x][point.y] = "E";
+        }
+        
+        return points;
 
     }
 
