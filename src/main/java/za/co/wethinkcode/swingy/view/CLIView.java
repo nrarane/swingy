@@ -71,13 +71,9 @@ public class CLIView {
             System.out.print("Your option: ");
             int chose = choice.nextInt();
 
-            System.out.println();
-
             if (chose == 1) {
+                System.out.println();
                 Point heroPos = new Point(5 / 2, 5 / 2);
-                for (int i = 0; i < 5; i++) {
-                    Point enemyPos = randXYPoint();
-                }
 
                 String[][] board = new String[5][5];
                 ArrayList<Point> points = initEnemy(board);
@@ -87,7 +83,6 @@ public class CLIView {
                         for (Point point : points) {
                             board[point.x][point.y] = "E";
                         }
-//                        ;
                         movePlayer("", heroPos, board);
                         System.out.print(board[i][j] + " ");
                     }
@@ -97,7 +92,7 @@ public class CLIView {
                 System.out.println();
                 while ((heroPos.x > -1 && heroPos.x < 5) && (heroPos.y > -1 && heroPos.y < 5)) {
 
-                    System.out.print("A: Left\nS: Down\nD: Right\nW: Up\n\n1: QuitSave\n2: Quit\n\nYour move: ");
+                    System.out.print("\nA: Left\nS: Down\nD: Right\nW: Up\n\n1: QuitSave\n2: Quit\n\nYour move: ");
 
                     Scanner moveHero = new Scanner(System.in);
                     String moveDirection = null;
@@ -137,6 +132,7 @@ public class CLIView {
                         System.out.println("Change stage. \nIncrease level(dependent on the hp accumulated)\n");
                         break;
                     }
+                    System.out.println();
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
                             drawGrid(board, i, j);
@@ -155,9 +151,6 @@ public class CLIView {
                         }
                         System.out.println();
                     }
-
-//                    movePlayer(moveDirection, heroPos, board);
-//                    initEnemy(board);
                 }
 
             } else if (chose == 2) {
@@ -183,25 +176,30 @@ public class CLIView {
 
     }
 
+    public void battleResult() {
+    }
+
     public void drawGrid(String[][] board, int i, int j) {
-
         board[i][j] = ".";
-
     }
 
     public void movePlayer(String direction, Point heroPos, String[][] board)  {
-
         board[heroPos.x][heroPos.y] = "H";
-
     }
 
     public ArrayList<Point> initEnemy(String[][] board)  {
 
         ArrayList<Point> points = new ArrayList<Point>();
+        Point randomPoint;
+        Point initHeroPoint = new Point((int) 5/2, (int) 5/2);
         int k = 0;
         while (k < 5) {
-            if (randXYPoint() != new Point((int) 5/2, (int) 5/2)) {
-                points.add(randXYPoint());
+            randomPoint = randXYPoint();
+            if (!randomPoint.equals(initHeroPoint)) {
+//                System.out.println((randomPoint.equals(initHeroPoint)));
+
+                points.add(randomPoint);
+
             } else {
                 continue;
             }
@@ -217,7 +215,7 @@ public class CLIView {
     }
 
     public Point randXYPoint(){
-        int min = 1;
+        int min = 0;
         int max = 5;
 
         double xValue = min + Math.random() * (max - min);
