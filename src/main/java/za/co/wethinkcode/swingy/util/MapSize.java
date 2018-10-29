@@ -6,7 +6,7 @@ public class MapSize {
         return (lvl - 1) * 5 + 10 - (lvl % 2);
     }
 
-    public int isNextLevel(int lvl) {
+    public static int isNextLevel(int lvl) {
         return (int) (lvl * 1000 + Math.pow((lvl - 1), 2) * 450);
     }
 

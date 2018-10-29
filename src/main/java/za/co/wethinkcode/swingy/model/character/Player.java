@@ -1,7 +1,5 @@
 package za.co.wethinkcode.swingy.model.character;
 
-import javax.swing.text.Position;
-
 public class Player {
 
     public String name;
@@ -9,7 +7,7 @@ public class Player {
     public int experience;
     public int attack;
     public int defence;
-    public int hitPoints;
+    public static int hitPoints;
     public int position;
 
     public Player(String name, int level, int experience, int attack, int defence, int hitPoints, int position) {
@@ -18,8 +16,12 @@ public class Player {
         this.experience = experience;
         this.attack = attack;
         this.defence = defence;
-        this.hitPoints = hitPoints;
+        this.setHitPoints(hitPoints);
         this.position = position;
+    }
+
+    public static int getHitPoints() {
+        return hitPoints;
     }
 
     public void setName(String name) {
@@ -42,8 +44,8 @@ public class Player {
         this.defence = defence;
     }
 
-    public void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
+    public static void setHitPoints(int hitPoints) {
+        Player.hitPoints = hitPoints;
     }
 
     public void setPosition(int position) {

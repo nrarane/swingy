@@ -1,11 +1,11 @@
 package za.co.wethinkcode.swingy.view;
 
+import za.co.wethinkcode.swingy.model.character.Enemy;
 import za.co.wethinkcode.swingy.model.character.Hero;
+import za.co.wethinkcode.swingy.util.MapSize;
 
-import javax.swing.text.Position;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CLIView {
@@ -61,7 +61,7 @@ public class CLIView {
 
             System.out.println( "name:    " + heroSelected.name + "\n" +
                     "attack:  " + heroSelected.attack + "\n" +
-                    "hp:      " + heroSelected.hitPoints + "\n" +
+                    "hp:      " + heroSelected.getHitPoints() + "\n" +
                     "xp:      " + heroSelected.experience + "\n" +
                     "defence: " + heroSelected.defence + "\n" );
 
@@ -73,12 +73,12 @@ public class CLIView {
 
             if (chose == 1) {
                 System.out.println();
-                Point heroPos = new Point(5 / 2, 5 / 2);
+                Point heroPos = new Point(MapSize.mapSize(1) / 2, MapSize.mapSize(1) / 2);
 
-                String[][] board = new String[5][5];
+                String[][] board = new String[MapSize.mapSize(1)][MapSize.mapSize(1)];
                 ArrayList<Point> points = initEnemy(board);
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 5; j++) {
+                for (int i = 0; i < MapSize.mapSize(1); i++) {
+                    for (int j = 0; j < MapSize.mapSize(1); j++) {
                         drawGrid(board, i, j);
                         for (Point point : points) {
                             board[point.x][point.y] = "E";
@@ -90,7 +90,7 @@ public class CLIView {
                 }
 
                 System.out.println();
-                while ((heroPos.x > -1 && heroPos.x < 5) && (heroPos.y > -1 && heroPos.y < 5)) {
+                while ((heroPos.x > -1 && heroPos.x < MapSize.mapSize(1)) && (heroPos.y > -1 && heroPos.y < MapSize.mapSize(1))) {
 
                     System.out.print("\nA: Left\nS: Down\nD: Right\nW: Up\n\n1: QuitSave\n2: Quit\n\nYour move: ");
 
@@ -128,13 +128,13 @@ public class CLIView {
                         }
 
                     }
-                    if ((heroPos.x == -1 || heroPos.x == 5) || (heroPos.y == -1 || heroPos.y == 5)) {
+                    if ((heroPos.x == -1 || heroPos.x == MapSize.mapSize(1)) || (heroPos.y == -1 || heroPos.y == MapSize.mapSize(1))) {
                         System.out.println("Change stage. \nIncrease level(dependent on the hp accumulated)\n");
                         break;
                     }
                     System.out.println();
-                    for (int i = 0; i < 5; i++) {
-                        for (int j = 0; j < 5; j++) {
+                    for (int i = 0; i < MapSize.mapSize(1); i++) {
+                        for (int j = 0; j < MapSize.mapSize(1); j++) {
                             drawGrid(board, i, j);
                             movePlayer(moveDirection, heroPos, board);
                             for (Point point : points) {
@@ -144,6 +144,11 @@ public class CLIView {
                                         String ANSI_RESET = "\u001B[0m";
                                         String ANSI_RED = "\u001B[31m";
                                         board[heroPos.x][heroPos.y] = ANSI_RED + "W" + ANSI_RESET;
+//                                        sofar none of this works the way it should
+//                                        Enemy.setHitPoints((int) (Math.random() * (10 - 0)));
+//                                        if (fightOrFlight() == 1) {
+//                                            drawGrid(board, point.x, point.y);
+//                                        }
                                     }
                                 }
                             }
@@ -171,12 +176,9 @@ public class CLIView {
             System.exit(0);
 
         } else {
-             System.out.println("You have to select 1 option");
+             System.out.println("You have to select 1 option from the above");
         }
 
-    }
-
-    public void battleResult() {
     }
 
     public void drawGrid(String[][] board, int i, int j) {
@@ -191,12 +193,11 @@ public class CLIView {
 
         ArrayList<Point> points = new ArrayList<Point>();
         Point randomPoint;
-        Point initHeroPoint = new Point((int) 5/2, (int) 5/2);
+        Point initHeroPoint = new Point((int) MapSize.mapSize(1)/2, (int) MapSize.mapSize(1)/2);
         int k = 0;
-        while (k < 5) {
+        while (k < MapSize.mapSize(1)) {
             randomPoint = randXYPoint();
             if (!randomPoint.equals(initHeroPoint)) {
-//                System.out.println((randomPoint.equals(initHeroPoint)));
 
                 points.add(randomPoint);
 
@@ -214,9 +215,23 @@ public class CLIView {
 
     }
 
+    public int fightOrFlight() {
+
+        if (Hero.getHitPoints()-1 < Enemy.getHitPoints()) {
+            Hero.setLosingMessage("Enemy: Omae wa mou shindeiru\nHero: Nani?");
+            System.out.println(Hero.getLosingMessage());
+            return 1;
+        } else {
+            Hero.setWinningMessage("Hero: Wipe yourself, you're weak");
+            System.out.println(Hero.getWinningMessage());
+            return 0;
+        }
+
+    }
+
     public Point randXYPoint(){
         int min = 0;
-        int max = 5;
+        int max = MapSize.mapSize(1);
 
         double xValue = min + Math.random() * (max - min);
         double yValue = min + Math.random() * (max - min);
