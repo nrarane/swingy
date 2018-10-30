@@ -5,6 +5,7 @@ import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.util.MapSize;
 
 import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -146,9 +147,8 @@ public class CLIView {
                                         board[heroPos.x][heroPos.y] = ANSI_RED + "W" + ANSI_RESET;
 //                                        sofar none of this works the way it should
 //                                        Enemy.setHitPoints((int) (Math.random() * (10 - 0)));
-//                                        if (fightOrFlight() == 1) {
-//                                            drawGrid(board, point.x, point.y);
-//                                        }
+                                        System.out.println(fightOrFlight());
+
                                     }
                                 }
                             }
@@ -215,16 +215,44 @@ public class CLIView {
 
     }
 
-    public int fightOrFlight() {
+    public int generateRndAttk() {
+        double rndAttk = Math.random() * 6;
+        System.out.print((int)rndAttk);
+        return (int) rndAttk;
+    }
 
-        if (Hero.getHitPoints()-1 < Enemy.getHitPoints()) {
-            Hero.setLosingMessage("Enemy: Omae wa mou shindeiru\nHero: Nani?");
-            System.out.println(Hero.getLosingMessage());
-            return 1;
+    public String fightOrFlight() {
+
+        boolean hAttack = false;
+        boolean eAttack = false;
+
+        while (Hero.getHitPoints() > 0 || Enemy.getHitPoints() > 0) {
+
+            int genRndAttkr = (int) Math.random() * 2;
+
+            if (genRndAttkr == 1) {
+                int heroAttk = generateRndAttk();
+                Enemy.setHitPoints(Enemy.getHitPoints() - heroAttk);
+                hAttack = false;
+//                eAttack = true;
+//                continue;
+            } else if (genRndAttkr == 2) {
+                int enemyAttk = generateRndAttk();
+                Hero.setHitPoints(Hero.getHitPoints() - enemyAttk);
+                eAttack = false;
+//                hAttack = true;
+//                continue;
+            } else {
+                continue;
+            }
+
+        }
+        if (Hero.getHitPoints() < 1) {
+            return "Enemy won";
+        } else if (Enemy.getHitPoints() < 1) {
+            return "You won";
         } else {
-            Hero.setWinningMessage("Hero: Wipe yourself, you're weak");
-            System.out.println(Hero.getWinningMessage());
-            return 0;
+            return "";
         }
 
     }
