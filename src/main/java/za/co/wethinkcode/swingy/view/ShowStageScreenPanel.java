@@ -149,9 +149,10 @@ public class ShowStageScreenPanel extends JPanel implements KeyListener,ActionLi
         fight = keys[KeyEvent.VK_F];
         run = keys[KeyEvent.VK_R];
         if (fight) {
-            if (Hero.getWinningMessage() == "be bop bop beep, you're dead") {
-                return;
-            }
+            return;
+//            if (Hero.getWinningMessage() == "be bop bop beep, you're dead") {
+//                return;
+//            }
         } else if (run) {
             return;
         } else {

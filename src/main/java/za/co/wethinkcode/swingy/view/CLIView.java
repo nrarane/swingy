@@ -1,9 +1,11 @@
 package za.co.wethinkcode.swingy.view;
 
+import za.co.wethinkcode.swingy.model.Map;
 import za.co.wethinkcode.swingy.model.character.Enemy;
 import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.util.MapSize;
 
+import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -13,15 +15,18 @@ public class CLIView {
 
     public CLIView() {
 
-        Hero hero = new Hero("lol", 1, 0, 2, 10, 3, 0);
-        Hero hero2 = new Hero("lol1", 1, 0, 2, 10, 0, 0);
-        Hero hero3 = new Hero("lol2", 1, 0, 3, 10, 1, 0);
+//        Hero hero = new Hero("lol", 1, 0, 2, 10, 3, 0);
+//        Hero hero2 = new Hero("lol1", 1, 0, 2, 10, 0, 0);
+//        Hero hero3 = new Hero("lol2", 1, 0, 3, 10, 1, 0);
+//        Map map = new Map();
 
         System.out.println("************************************");
         System.out.println("*        Welcome to swingy!        *");
         System.out.println("*       Show us what you got       *");
         System.out.println("*              Created by: nrarane *");
         System.out.println("************************************\n");
+
+//        System.out.print(map);
 
         System.out.println("What would you like to do?\n");
         System.out.println("1. New Game\n2. Load Game\n3. Exit\n");
@@ -48,23 +53,19 @@ public class CLIView {
 
             System.out.println("Please select your hero\n");
 
-            System.out.println("1. " + hero.name);
-            System.out.println("2. " + hero2.name);
-            System.out.println("3. " + hero3.name);
+//            System.out.println("1. " + hero);
+//            System.out.println("2. " + hero2.name);
+//            System.out.println("3. " + hero3.name);
             System.out.println();
             System.out.print("Your hero: ");
 
             Scanner characterInput = new Scanner(System.in);
             int character = characterInput.nextInt();
 
-            Hero[] heroes = {hero, hero2, hero3};
-            Hero heroSelected = heroes[character - 1];
+//            Hero[] heroes = {hero, hero2, hero3};
+//            Hero heroSelected = heroes[character - 1];
 
-            System.out.println( "name:    " + heroSelected.name + "\n" +
-                    "attack:  " + heroSelected.attack + "\n" +
-                    "hp:      " + heroSelected.getHitPoints() + "\n" +
-                    "xp:      " + heroSelected.experience + "\n" +
-                    "defence: " + heroSelected.defence + "\n" );
+            System.out.println();
 
             System.out.println("1. Continue\n2. Back\n3. Exit\n");
 
@@ -110,7 +111,6 @@ public class CLIView {
                     } else if (moveHero.hasNext()) {
                         moveDirection = moveHero.next();
 
-
                         switch (moveDirection.toUpperCase()) {
                             case "W":
                                 heroPos.x = heroPos.x - 1;
@@ -129,6 +129,7 @@ public class CLIView {
                         }
 
                     }
+
                     if ((heroPos.x == -1 || heroPos.x == MapSize.mapSize(1)) || (heroPos.y == -1 || heroPos.y == MapSize.mapSize(1))) {
                         System.out.println("Change stage. \nIncrease level(dependent on the hp accumulated)\n");
                         break;
@@ -145,16 +146,24 @@ public class CLIView {
                                         String ANSI_RESET = "\u001B[0m";
                                         String ANSI_RED = "\u001B[31m";
                                         board[heroPos.x][heroPos.y] = ANSI_RED + "W" + ANSI_RESET;
+//                                        heroSelected.setInFight(true);
 //                                        sofar none of this works the way it should
 //                                        Enemy.setHitPoints((int) (Math.random() * (10 - 0)));
-                                        System.out.println(fightOrFlight());
+//                                        System.out.println(fightOrFlight());
 
                                     }
+
                                 }
+//                                if (heroSelected.isInFight()) {
+//                                    Enemy villain;
+//                                    fightOrFlight(heroSelected, villain);
+//
+//                                }
                             }
                             System.out.print(board[i][j] + " ");
                         }
                         System.out.println();
+//                        System.out.println(fightOrFlight());
                     }
                 }
 
@@ -207,8 +216,11 @@ public class CLIView {
             k++;
         }
 
+
+        int i = 0;
         for ( Point point : points ) {
             board[point.x][point.y] = "E";
+//            villain[i].setPosition(point);
         }
         
         return points;
@@ -221,39 +233,40 @@ public class CLIView {
         return (int) rndAttk;
     }
 
-    public String fightOrFlight() {
+    public void fightOrFlight(Hero heroSelected) {
 
-        boolean hAttack = false;
+        boolean hAttack = true;
         boolean eAttack = false;
 
-        while (Hero.getHitPoints() > 0 || Enemy.getHitPoints() > 0) {
+        while ((heroSelected.getHitPoints() > 0) && (true)) { /*villain.getHitPoints() > 0)) {*/
 
-            int genRndAttkr = (int) Math.random() * 2;
+//            int genRndAttkr = (int) Math.random() * 2;
 
-            if (genRndAttkr == 1) {
+//            System.out.println(genRndAttkr);
+            if (hAttack) {
                 int heroAttk = generateRndAttk();
-                Enemy.setHitPoints(Enemy.getHitPoints() - heroAttk);
+//                Enemy.setHitPoints(Enemy.getHitPoints() - heroAttk);
                 hAttack = false;
-//                eAttack = true;
+                eAttack = true;
 //                continue;
-            } else if (genRndAttkr == 2) {
+            } else if (eAttack) {
                 int enemyAttk = generateRndAttk();
-                Hero.setHitPoints(Hero.getHitPoints() - enemyAttk);
+                heroSelected.setHitPoints(heroSelected.getHitPoints() - enemyAttk);
                 eAttack = false;
-//                hAttack = true;
+                hAttack = true;
 //                continue;
             } else {
                 continue;
             }
 
         }
-        if (Hero.getHitPoints() < 1) {
-            return "Enemy won";
-        } else if (Enemy.getHitPoints() < 1) {
-            return "You won";
-        } else {
-            return "";
-        }
+//        if (Hero.getHitPoints() < 1) {
+//            return "Enemy won";
+//        } else if (Enemy.getHitPoints() < 1) {
+//            return "You won";
+//        } else {
+//            return "";
+//        }
 
     }
 

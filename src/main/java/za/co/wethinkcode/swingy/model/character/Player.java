@@ -1,55 +1,67 @@
 package za.co.wethinkcode.swingy.model.character;
 
-public class Player {
+import lombok.Getter;
+import lombok.Setter;
 
-    public String name;
-    public int level;
-    public int experience;
-    public int attack;
-    public int defence;
-    public static int hitPoints;
-    public int position;
+import java.awt.*;
 
-    public Player(String name, int level, int experience, int attack, int defence, int hitPoints, int position) {
+@Getter
+@Setter
+public abstract class Player {
+
+    protected String name;
+    protected int level;
+    protected int experience;
+    protected int attack;
+    protected int defence;
+    protected int hitPoints;
+    protected Point position;
+    protected boolean inFight;
+
+    public Player(String name, int level, int experience, int attack, int defence, int hitPoints, Point position) {
         this.name = name;
         this.level = level;
         this.experience = experience;
         this.attack = attack;
         this.defence = defence;
-        this.setHitPoints(hitPoints);
+        this.hitPoints = hitPoints;
         this.position = position;
+        this.inFight = false;
     }
 
-    public static int getHitPoints() {
-        return hitPoints;
+    protected Player() {
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-    }
-
-    public static void setHitPoints(int hitPoints) {
-        Player.hitPoints = hitPoints;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
+//    public static int getHitPoints() {
+//        return hitPoints;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public void setLevel(int level) {
+//        this.level = level;
+//    }
+//
+//    public void setExperience(int experience) {
+//        this.experience = experience;
+//    }
+//
+//    public void setAttack(int attack) {
+//        this.attack = attack;
+//    }
+//
+//    public void setDefence(int defence) {
+//        this.defence = defence;
+//    }
+//
+//    public static void setHitPoints(int hitPoints) {
+//        Player.hitPoints = hitPoints;
+//    }
+//
+//    public void setPosition(int position) {
+//        this.position = position;
+//    }
 
 }
