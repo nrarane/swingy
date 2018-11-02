@@ -2,13 +2,16 @@ package za.co.wethinkcode.swingy.controller;
 
 import javafx.geometry.Pos;
 import za.co.wethinkcode.swingy.EDirection;
+import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.model.character.Player;
 import za.co.wethinkcode.swingy.util.MapSize;
 
+import java.awt.*;
 import java.util.HashMap;
 
 public class MapController {
-    public HashMap<Pos, Player> gameMap;
+    /*public HashMap<Pos, Player> gameMap;*/
+//    Hero hero = new Hero();
 
     public MapController(int size) {
         size = MapSize.mapSize(1);
@@ -22,25 +25,26 @@ public class MapController {
         return false;
     }
 
-    public boolean movePlayer(EDirection direction) {
+    public void movePlayer(EDirection direction) {
 
-        switch (moveDirection.toUpperCase()) {
-            case "W":
-                heroPos.x = heroPos.x - 1;
+//        Point heroPos = hero.getPosition();
+
+        switch (direction) {
+            case NORTH:
+//                heroPos.x = heroPos.x - 1;
                 break;
-            case "A":
-                heroPos.y = heroPos.y - 1;
+            case EAST:
+//                heroPos.y = heroPos.y - 1;
                 break;
-            case "S":
-                heroPos.x = heroPos.x + 1;
+            case SOUTH:
+//                heroPos.x = heroPos.x + 1;
                 break;
-            case "D":
-                heroPos.y = heroPos.y + 1;
+            case WEST:
+//                heroPos.y = heroPos.y + 1;
                 break;
             default:
                 break;
         }
 
-        return true;
     }
 }

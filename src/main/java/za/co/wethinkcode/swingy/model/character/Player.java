@@ -3,6 +3,7 @@ package za.co.wethinkcode.swingy.model.character;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.awt.*;
 
 @Getter
@@ -31,37 +32,5 @@ public abstract class Player {
 
     protected Player() {
     }
-
-//    public static int getHitPoints() {
-//        return hitPoints;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public void setLevel(int level) {
-//        this.level = level;
-//    }
-//
-//    public void setExperience(int experience) {
-//        this.experience = experience;
-//    }
-//
-//    public void setAttack(int attack) {
-//        this.attack = attack;
-//    }
-//
-//    public void setDefence(int defence) {
-//        this.defence = defence;
-//    }
-//
-//    public static void setHitPoints(int hitPoints) {
-//        Player.hitPoints = hitPoints;
-//    }
-//
-//    public void setPosition(int position) {
-//        this.position = position;
-//    }
 
 }
