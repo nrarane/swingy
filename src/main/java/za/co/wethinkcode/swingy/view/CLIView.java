@@ -289,8 +289,11 @@ public class CLIView {
     }
 
     public void loadHeroSelectionScreen() {
-        System.out.println("Choose previous hero:\n" +
-                "");
+        System.out.print("Choose saved game:\n" +
+                "1: " +
+                "2: " +
+                "3: " +
+                "Load game: ");
     }
 
 }
