@@ -1,5 +1,6 @@
 package za.co.wethinkcode.swingy.controller;
 import za.co.wethinkcode.swingy.EHeroClass;
+import za.co.wethinkcode.swingy.model.Map;
 import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.view.CLIView;
 
@@ -28,8 +29,16 @@ public class CLIController extends InterfaceController {
             if (parseInt(choice) >= 1 && parseInt(choice) <= 3) {
                 if (choice.equals("1")) {
                     //display info about the hero then ask player to fill their name (min 3 chars)
-                    System.out.println("Please enter your name: ");
-                    
+
+
+
+                    System.out.println("continue(y/n): ");
+                    if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes")) {
+                        loadStage();
+                    } else {
+                        showHeroSelection();
+                    }
+
                 } else if  (choice.equals("2")) {
                     System.out.println("you selected this other guy");
                 } else if (choice.equals("3")) {
@@ -52,7 +61,7 @@ public class CLIController extends InterfaceController {
         String choice = scanner.next();
 
         try {
-
+            // show previous games on this screen
         } catch (NullPointerException e) {
             System.out.println("Please select 1 of the above options");
             loadPreviousGame();
@@ -84,6 +93,10 @@ public class CLIController extends InterfaceController {
 
     @Override
     public void loadStage() {
+
+    }
+
+    public void updateMap() {
 
     }
 }

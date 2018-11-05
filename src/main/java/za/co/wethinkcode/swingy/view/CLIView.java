@@ -1,17 +1,13 @@
 package za.co.wethinkcode.swingy.view;
 
 import za.co.wethinkcode.swingy.EHeroClass;
-import za.co.wethinkcode.swingy.controller.CLIController;
+import za.co.wethinkcode.swingy.model.Arena;
 import za.co.wethinkcode.swingy.model.Map;
 import za.co.wethinkcode.swingy.model.character.Enemy;
 import za.co.wethinkcode.swingy.model.character.Hero;
-import za.co.wethinkcode.swingy.util.MapSize;
+import za.co.wethinkcode.swingy.model.character.Player;
 
-import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class CLIView {
 
@@ -294,6 +290,29 @@ public class CLIView {
                 "2: " +
                 "3: " +
                 "Load game: ");
+    }
+
+    public void printMap(Arena arena) {
+        Point point = new Point();
+        Map worldMap = arena.getMap();
+
+        for (int y = 0; y < worldMap.getSize(); y++) {
+            for (int x = 0; x < worldMap.getSize(); x++) {
+                point.x = x;
+                point.y = y;
+                Player player = worldMap.getMap().get(point);
+
+                if (player == null)
+                    System.out.print("[ ]");
+                else if (player instanceof Enemy && player.getPoint().equals(arena.getHero().getPoint()))
+                    System.out.print("[*]");
+                else if (player instanceof Hero)
+                    System.out.print("[H]");
+                else if (player instanceof Enemy)
+                    System.out.print("[V]");
+            }
+            System.out.println();
+        }
     }
 
 }

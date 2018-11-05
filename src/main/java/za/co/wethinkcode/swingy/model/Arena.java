@@ -1,9 +1,12 @@
 package za.co.wethinkcode.swingy.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import za.co.wethinkcode.swingy.model.character.Enemy;
 import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.model.character.Player;
 
+@Getter @Setter
 public class Arena {
 
     public Hero hero;
