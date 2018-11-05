@@ -1,9 +1,12 @@
 package za.co.wethinkcode.swingy.controller;
 import za.co.wethinkcode.swingy.EHeroClass;
+import za.co.wethinkcode.swingy.model.Arena;
 import za.co.wethinkcode.swingy.model.Map;
+import za.co.wethinkcode.swingy.model.character.Enemy;
 import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.view.CLIView;
 
+import java.awt.*;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -13,6 +16,10 @@ public class CLIController extends InterfaceController {
     CLIView cliView = new CLIView();
 
     Scanner scanner = new Scanner(System.in);
+
+    public CLIController(ArenaController arenaController) {
+        super(arenaController);
+    }
 
     @Override
     public void startGame() {
@@ -25,6 +32,14 @@ public class CLIController extends InterfaceController {
         cliView.newHeroSelectionScreen();
         String choice = scanner.next();
 
+        Map map = new Map();
+
+        map.setSize(9);
+
+        Arena arena = new Arena(new Hero("lp", 1, 1, 1, 1, 1, new Point(1, 1)),
+                new Enemy("lp", 1, 1, 1, 1, 1, new Point(2, 2)),
+                map);
+
         try {
             if (parseInt(choice) >= 1 && parseInt(choice) <= 3) {
                 if (choice.equals("1")) {
@@ -33,6 +48,8 @@ public class CLIController extends InterfaceController {
 
 
                     System.out.println("continue(y/n): ");
+
+                    choice = scanner.next();
                     if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes")) {
                         loadStage();
                     } else {
@@ -93,10 +110,14 @@ public class CLIController extends InterfaceController {
 
     @Override
     public void loadStage() {
-
+        cliView.printMap(arenaController.getArena());
     }
 
-    public void updateMap() {
+//    public void updateMap() {
+//        cliView.printMap();
+//    }
 
+    public CLIController() {
+        super();
     }
 }

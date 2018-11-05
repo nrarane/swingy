@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Map {
 
     HashMap<Point, Player> map;
-    private int size = 0;
+    private int size;
 
     public Map() {
         this.size = 0;
