@@ -10,11 +10,8 @@ import java.awt.*;
 @Setter
 public class Enemy extends Player {
 
-    private String winningMessage;
-    private String losingMessage;
-
-    public Enemy(String name, int level, int experience, int attack, int hitPoints, int defence, Point position) {
-        super(name, level, experience, attack, defence, hitPoints, position);
+    public Enemy(String name, int attack, int hitPoints, int defence, Point position) {
+        super(name, attack, defence, hitPoints, position);
     }
 
 }

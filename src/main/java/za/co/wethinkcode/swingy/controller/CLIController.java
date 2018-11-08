@@ -4,6 +4,7 @@ import za.co.wethinkcode.swingy.model.Arena;
 import za.co.wethinkcode.swingy.model.Map;
 import za.co.wethinkcode.swingy.model.character.Enemy;
 import za.co.wethinkcode.swingy.model.character.Hero;
+import za.co.wethinkcode.swingy.model.character.Player;
 import za.co.wethinkcode.swingy.view.CLIView;
 
 import java.awt.*;
@@ -32,22 +33,35 @@ public class CLIController extends InterfaceController {
         cliView.newHeroSelectionScreen();
         String choice = scanner.next();
 
-        Map map = new Map();
 
-        map.setSize(9);
+//        ///TODO: find relevant place for this
 
-        Arena arena = new Arena(new Hero("lp", 1, 1, 1, 1, 1, new Point(1, 1)),
-                new Enemy("lp", 1, 1, 1, 1, 1, new Point(2, 2)),
-                map);
+//        Map map = arenaController.getArena().getMap();
+//        map.setSize(9);
+
+//        Hero hero = arenaController.getArena().getHero();
+//        hero.setName("ll");
+//        hero.setAttack(1);
+//        hero.setDefence(1);
+//        hero.setHitPoints(10);
+//        hero.setPoint(arenaController.placeInCenter(map.getSize()));
+//
+//        Enemy enemy = arenaController.getArena().getEnemy();
+//        enemy.setName("ll");
+//        enemy.setAttack(1);
+//        enemy.setDefence(1);
+//        enemy.setHitPoints(10);
+//        enemy.setPoint(new Point(1,1));
+
+        arenaController.setArena(this.arenaController.getArena());
+        PlayerFactory playerFactory = new PlayerFactory(arenaController);
 
         try {
             if (parseInt(choice) >= 1 && parseInt(choice) <= 3) {
                 if (choice.equals("1")) {
-                    //display info about the hero then ask player to fill their name (min 3 chars)
+                    //display info about the enemy then ask player to fill their name (min 3 chars)
 
-
-
-                    System.out.println("continue(y/n): ");
+                    System.out.print("\ncontinue(y/n): ");
 
                     choice = scanner.next();
                     if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes")) {
@@ -113,11 +127,6 @@ public class CLIController extends InterfaceController {
         cliView.printMap(arenaController.getArena());
     }
 
-//    public void updateMap() {
-//        cliView.printMap();
-//    }
+    public CLIController() { super(); }
 
-    public CLIController() {
-        super();
-    }
 }

@@ -16,9 +16,9 @@ public class CLIView {
 //        Hero hero = new Hero("lol", 1, 0, 2, 10, 3, 0);
 //        Hero hero2 = new Hero("lol1", 1, 0, 2, 10, 0, 0);
 //        Hero hero3 = new Hero("lol2", 1, 0, 3, 10, 1, 0);
-//        Map map = new Map();
+//        Map mapPoints = new Map();
 
-//        System.out.print(map);
+//        System.out.print(mapPoints);
 
 //        System.out.println("What would you like to do?\n");
 //        System.out.println("1. New Game\n2. Load Game\n3. Exit\n");
@@ -300,7 +300,7 @@ public class CLIView {
             for (int x = 0; x < worldMap.getSize(); x++) {
                 point.x = x;
                 point.y = y;
-                Player player = worldMap.getMap().get(point);
+                Player player = worldMap.getMapPoints().get(point);
 
                 if (player == null)
                     System.out.print("[ ]");

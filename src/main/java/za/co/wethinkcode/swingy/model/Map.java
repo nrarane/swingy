@@ -11,12 +11,12 @@ import java.util.HashMap;
 @Setter
 public class Map {
 
-    HashMap<Point, Player> map;
+    HashMap<Point, Player> mapPoints;
     private int size;
 
     public Map() {
         this.size = 0;
-        map = new HashMap<>();
+        mapPoints = new HashMap<>();
     }
 
 }

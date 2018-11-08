@@ -43,7 +43,6 @@ public class HeroSelectionScreenPanel extends JPanel {
     }
 
     public void showHeroInfoActionListener(ActionListener e) {
-//        heroOne.addActionListener(showHeroInfo);
         for (int i = 0; i < heroBtn.length; i++) {
 
             heroBtn[i].addActionListener(e);
@@ -54,4 +53,5 @@ public class HeroSelectionScreenPanel extends JPanel {
     public void startGameActionListener(ActionListener startGame) {
         this.startGame.addActionListener(startGame);
     }
+
 }

@@ -12,7 +12,9 @@ public class Hero extends Player {
 
     private static String winningMessage;
     private static String losingMessage;
-    protected boolean inFight;
+    protected boolean inFight = false;
+    protected int experience = 0;
+    protected int level = 1;
 
     EHeroClass eheroclass;
 
@@ -29,12 +31,8 @@ public class Hero extends Player {
                 '}';
     }
 
-    public Hero(String name, int level, int experience, int attack, int hitPoints, int defence, Point position) {
-        super(name, 1, 0, attack, defence, 100, position);
-    }
-
-    protected Hero() {
-        super();
+    public Hero(String name, int attack, int hitPoints, int defence, Point position) {
+        super(name, attack, defence, hitPoints, position);
     }
 
 }

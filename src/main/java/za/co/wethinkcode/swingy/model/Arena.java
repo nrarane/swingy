@@ -18,4 +18,5 @@ public class Arena {
         this.enemy = enemy;
         this.map = map;
     }
+
 }
