@@ -30,35 +30,22 @@ public class CLIController extends InterfaceController {
 
     @Override
     public void showHeroSelection() {
+
+        cliView.userNameRequest();
+        String profileName = scanner.next();
         cliView.newHeroSelectionScreen();
         String choice = scanner.next();
 
-
-//        ///TODO: find relevant place for this
-
-//        Map map = arenaController.getArena().getMap();
-//        map.setSize(9);
-
-//        Hero hero = arenaController.getArena().getHero();
-//        hero.setName("ll");
-//        hero.setAttack(1);
-//        hero.setDefence(1);
-//        hero.setHitPoints(10);
-//        hero.setPoint(arenaController.placeInCenter(map.getSize()));
-//
-//        Enemy enemy = arenaController.getArena().getEnemy();
-//        enemy.setName("ll");
-//        enemy.setAttack(1);
-//        enemy.setDefence(1);
-//        enemy.setHitPoints(10);
-//        enemy.setPoint(new Point(1,1));
-
         arenaController.setArena(this.arenaController.getArena());
-        PlayerFactory playerFactory = new PlayerFactory(arenaController);
+        PlayerFactory playerFactory = new PlayerFactory(arenaController, profileName);
 
         try {
             if (parseInt(choice) >= 1 && parseInt(choice) <= 3) {
                 if (choice.equals("1")) {
+                    String heroStats = arenaController.getArena().getHero().toString();
+
+                    cliView.showHeroStats(heroStats);
+
                     //display info about the enemy then ask player to fill their name (min 3 chars)
 
                     System.out.print("\ncontinue(y/n): ");

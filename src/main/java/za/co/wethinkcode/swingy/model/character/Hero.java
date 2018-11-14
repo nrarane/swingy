@@ -20,15 +20,13 @@ public class Hero extends Player {
 
     @Override
     public String toString() {
-        return "Hero{" +
-                "name='" + name + '\'' +
-                "\nhero class=" + eheroclass +
-                "\nlevel=" + level +
-                "\nexperience=" + experience +
-                "\nattack=" + attack +
-                "\ndefence=" + defence +
-                "\nhitPoints=" + hitPoints +
-                '}';
+        return "name        = " + name +
+                "\nhero class  = " + eheroclass +
+                "\nlevel       = " + level +
+                "\nexperience  = " + experience +
+                "\nattack      = " + attack +
+                "\ndefence     = " + defence +
+                "\nhitPoints   = " + hitPoints ;
     }
 
     public Hero(String name, int attack, int hitPoints, int defence, Point position) {

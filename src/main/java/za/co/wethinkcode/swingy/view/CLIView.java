@@ -303,16 +303,30 @@ public class CLIView {
                 Player player = worldMap.getMapPoints().get(point);
 
                 if (player == null)
-                    System.out.print("[ ]");
+                    System.out.print(". ");
                 else if (player instanceof Enemy && player.getPoint().equals(arena.getHero().getPoint()))
-                    System.out.print("[*]");
+                    System.out.print("* ");
                 else if (player instanceof Hero)
-                    System.out.print("[H]");
+                    System.out.print("H ");
                 else if (player instanceof Enemy)
-                    System.out.print("[V]");
+                    System.out.print("V ");
             }
             System.out.println();
         }
     }
 
+    public void showHeroStats(String heroStats) {
+        System.out.println("=========================");
+        System.out.println("*Your chosen hero stats:*");
+        System.out.println("=========================");
+        System.out.println(heroStats);
+        System.out.println("=========================");
+    }
+
+    public void userNameRequest() {
+        System.out.println("================================");
+        System.out.println("*Please enter profile/user name*");
+        System.out.println("================================");
+        System.out.print("> ");
+    }
 }
