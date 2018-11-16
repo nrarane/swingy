@@ -12,6 +12,7 @@ public class Arena {
     public Hero hero;
     public Enemy enemy;
     public Map map;
+    public boolean isGameOver = false ;
 
     public Arena(Hero hero, Enemy enemy, Map map) {
         this.hero = hero;

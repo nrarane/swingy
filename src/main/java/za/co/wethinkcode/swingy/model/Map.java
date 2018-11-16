@@ -18,5 +18,4 @@ public class Map {
         this.size = 0;
         mapPoints = new HashMap<>();
     }
-
 }

@@ -329,4 +329,18 @@ public class CLIView {
         System.out.println("================================");
         System.out.print("> ");
     }
+
+    public void moveKeys() {
+        System.out.println("Moving keys");
+        System.out.println("\"A\": Move left");
+        System.out.println("\"D\": Move right");
+        System.out.println("\"W\": Move up");
+        System.out.println("\"S\": Move down");
+        System.out.println("\"q\": Quit game");
+    }
+
+    public void keyNotKnown() {
+        System.out.println("Key not valid");
+        moveKeys();
+    }
 }

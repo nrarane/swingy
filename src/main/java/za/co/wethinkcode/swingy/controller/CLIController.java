@@ -1,15 +1,11 @@
 package za.co.wethinkcode.swingy.controller;
+
 import za.co.wethinkcode.swingy.EHeroClass;
-import za.co.wethinkcode.swingy.model.Arena;
-import za.co.wethinkcode.swingy.model.Map;
-import za.co.wethinkcode.swingy.model.character.Enemy;
-import za.co.wethinkcode.swingy.model.character.Hero;
 import za.co.wethinkcode.swingy.model.character.Player;
 import za.co.wethinkcode.swingy.view.CLIView;
 
 import java.awt.*;
 import java.util.Scanner;
-
 import static java.lang.Integer.parseInt;
 
 public class CLIController extends InterfaceController {
@@ -33,44 +29,59 @@ public class CLIController extends InterfaceController {
 
         cliView.userNameRequest();
         String profileName = scanner.next();
-        cliView.newHeroSelectionScreen();
-        String choice = scanner.next();
+
 
         arenaController.setArena(this.arenaController.getArena());
         PlayerFactory playerFactory = new PlayerFactory(arenaController, profileName);
-
         try {
-            if (parseInt(choice) >= 1 && parseInt(choice) <= 3) {
-                if (choice.equals("1")) {
-                    String heroStats = arenaController.getArena().getHero().toString();
+            String choice;
+            boolean valdInput = false;
+            boolean classSelected = false;
 
-                    cliView.showHeroStats(heroStats);
-
-                    //display info about the enemy then ask player to fill their name (min 3 chars)
-
-                    System.out.print("\ncontinue(y/n): ");
-
-                    choice = scanner.next();
-                    if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes")) {
-                        loadStage();
-                    } else {
-                        showHeroSelection();
-                    }
-
-                } else if  (choice.equals("2")) {
-                    System.out.println("you selected this other guy");
-                } else if (choice.equals("3")) {
-                    System.out.println("wow this guy is dead");
+            while (!valdInput){
+                cliView.newHeroSelectionScreen();
+                choice = scanner.next();
+                if (parseInt(choice) >= 1 && parseInt(choice) <= 3) {
+                    classSelected = heroClassSelection(choice);
+                    valdInput = true;
                 } else {
-                    System.exit(0);
+                    System.out.println("Select 1 of the above options");
+                    continue;
                 }
-            } else {
-                System.out.println("Select 1 of the above options");
             }
+
+            if (classSelected){
+                String heroStats = arenaController.getArena().getHero().toString();
+                cliView.showHeroStats(heroStats);
+                System.out.print("\ncontinue(y/n): ");
+            }
+
+            choice = scanner.next();
+            if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes")) {
+                loadStage();
+            } else {
+                showHeroSelection();
+            }
+
+
         } catch (NumberFormatException e) {
             System.out.println("\nPlease select 1 of the above options\n");
             showHeroSelection();
         }
+    }
+
+    private boolean heroClassSelection(String choice) {
+        if (choice.equals("1")) {
+            arenaController.getArena().getHero().setEheroclass(EHeroClass.Contractor);
+            return true;
+        } else if  (choice.equals("2")) {
+            arenaController.getArena().getHero().setEheroclass(EHeroClass.DC);
+            return true;
+        } else if (choice.equals("3")) {
+            arenaController.getArena().getHero().setEheroclass(EHeroClass.Marvel);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -111,9 +122,44 @@ public class CLIController extends InterfaceController {
 
     @Override
     public void loadStage() {
-        cliView.printMap(arenaController.getArena());
+        while (!arenaController.getArena().isGameOver) {
+            cliView.printMap(arenaController.getArena());
+            movePlayer();
+        }
     }
 
-    public CLIController() { super(); }
+    private void movePlayer() {
+
+        cliView.moveKeys();
+
+        Point position = arenaController.getArena().getHero().getPoint();
+        int mapSize = arenaController.getArena().getMap().getSize();
+        int posX = position.x;
+        int posY = position.y;
+        Player hero = (Player) arenaController.getArena().getHero();
+
+        if ((posX < mapSize && posX > 0) && (posY < mapSize && posY > 0)){
+            arenaController.getArena().getHero().setPoint(updatePosition(position));
+//            arenaController.getArena().map.setMapPoints(position, hero);
+        }
+    }
+
+    private Point updatePosition(Point position) {
+        String moveDir = scanner.next();
+
+        if (moveDir.equalsIgnoreCase("A")){
+            position.y--;
+        } else if (moveDir.equalsIgnoreCase("D")){
+            position.y++;
+        } else if (moveDir.equalsIgnoreCase("W")){
+            position.x--;
+        } else if (moveDir.equalsIgnoreCase("S")){
+            position.x++;
+        } else {
+            cliView.keyNotKnown();
+            movePlayer();
+        }
+        return position;
+    }
 
 }
